@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-u" />
+    <title>{% block title %}아름다운 아떼{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/common.css' %}" type="text/css" media="screen" />
+    {% block css %}{% endblock %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
+    {% block script %}{% endblock %}
+  </head>
+  <body>
+    <h1>아떼2 beta</h1>
+    {% block content %}{% endblock %}
+  </body>
+</html>
