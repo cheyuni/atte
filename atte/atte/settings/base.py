@@ -1,9 +1,8 @@
 # Django settings for atte project.
-
 import os
 import re
 from os.path import join, abspath, dirname
-
+from django.core.exceptions import ImproperlyConfigured
 
 here = lambda *x: join(abspath(dirname(__file__)), *x)
 PROJECT_ROOT = here("..", "..")
@@ -55,7 +54,7 @@ DATE_FORMAT=('Y-m-d')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    root('static')
+    root('static'),
 )
 
 STATICFILES_FINDERS = (
@@ -78,6 +77,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',    
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -95,6 +95,7 @@ DJANGO_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.flatpages',    
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
@@ -103,12 +104,13 @@ DJANGO_APPS = [
 
 ATTE_APPS = [
     'playlists',
-    'accounts'
+    'users'
 ]
 
 THIRD_PARTY_APPS = [
     'django_extensions',
-    'tastypie',
+    # 'tastypie',
+    'django_facebook',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + ATTE_APPS + THIRD_PARTY_APPS
@@ -136,3 +138,27 @@ LOGGING = {
         },
     }
 }
+
+FACEBOOK_APP_ID = '525170764238004'
+FACEBOOK_APP_SECRET = '6ace948125d2f74c020e0c2fe74cf198'
+TEMPLATE_CONTEXT_PROCESSORS = [
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+    'django_facebook.context_processors.facebook' ]
+
+
+AUTHENTICATION_BACKENDS = (
+    'django_facebook.auth_backends.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+AUTH_USER_MODEL = 'django_facebook.FacebookCustomUser'
+AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
+
+# AUTH_USER_MODEL = 'users.User'
