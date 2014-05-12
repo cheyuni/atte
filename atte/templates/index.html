@@ -1,12 +1,17 @@
-{% extends "layout.html" %}
-{% load staticfiles %}
-
+{% extends "base.html" %}
 {% block script %}
-<script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>
 {% endblock %}
-
 {% block content %}
-{% for video in playlist.video_set.all %}
-{{ video.query }}<br />
-{% endfor %}
+<div id="player_container">
+	<div id="search_playlist" class="input-group">
+		<input class="form-control" onkeydown="if(event.keyCode==13){javascript:search_playlist();}" type="text" placeholder="리스트 검색">
+		<span class="pointer input-group-addon">검색</span>
+	</div>
+	<div id="player">
+
+	</div>
+</div>
+
+
+
 {% endblock %}

@@ -20,7 +20,7 @@ def get_env_variable(var_name):
         raise ImproperlyConfigured(error_msg)
 
 SECRET_KEY = get_env_variable('DJANGO_SECRET_KEY')
-        
+
 ADMINS = (
     ('TaeYun Lee', 'ok7217@gmail.com'),
     ('Mingi Kim', 'mgsmurf@mgail.com')
@@ -77,7 +77,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',    
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -95,7 +95,7 @@ DJANGO_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django.contrib.flatpages',    
+    'django.contrib.flatpages',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
